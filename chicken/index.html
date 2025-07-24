@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Gacha Game</title>
+
+    <link rel="stylesheet" href="./style.css">
+
+</head>
+
+<body>
+
+    <div id="app-loading">
+        <div class="loading-text">
+            <h1>
+                Loading...
+            </h1>
+        </div>
+    </div>
+
+    <div id="app-container">
+
+        <div id="main-app">
+
+            <div id="overlap-container" hidden>
+                <div id="gacha-flash" hidden></div>
+                <div id="gacha-result" hidden>
+                    <div class="close"></div>
+                    <div id="result-wrapper"></div>
+                </div>
+            </div>
+
+            <div id="logo-row">
+                <img src="./assets/logo.png" alt="logo" id="logo">
+            </div>
+
+            <div id="gacha-trigger">
+                <div id="gacha-idle" class="gacha-box"></div>
+                <div id="gacha-rolling" class="gacha-box" hidden></div>
+            </div>
+
+            <div id="type-box">
+                <div class="type-button type-1" data-type="1">
+                    <img src="./assets/type-button-1.png">
+                </div>
+                <div class="type-button type-5" data-type="5">
+                    <img src="./assets/type-button-5.png">
+                </div>
+                <div class="type-button type-10" data-type="10">
+                    <img src="./assets/type-button-10.png">
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="./app.js"></script>
+</body>
+
+</html>

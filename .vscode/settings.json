@@ -1,0 +1,16 @@
+{
+    "[css]": {
+        "editor.formatOnSave": true,
+        "editor.tabSize": 4
+    },
+    "[html]": {
+        "editor.formatOnSave": true,
+        "editor.tabSize": 4
+    },
+    "[javascript]": {
+        "editor.formatOnSave": true,
+        "editor.tabSize": 2
+    },
+    "javascript.format.semicolons": "insert",
+    "javascript.suggest.completeFunctionCalls": true
+}
