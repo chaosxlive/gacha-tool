@@ -303,8 +303,8 @@ body {
 
 @font-face {
     font-family: 'JuneGull';
-    src: url('./fonts/junegull.woff2') format('woff2'),
-        url('./fonts/junegull.woff') format('woff');
+    src: url('./fonts/Junegull.woff2') format('woff2'),
+        url('./fonts/Junegull.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
