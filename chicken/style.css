@@ -4,6 +4,7 @@
 
 * {
     box-sizing: border-box;
+    font-family: 'JuneGull', sans-serif;
 }
 
 html,
@@ -172,13 +173,13 @@ body {
 #overlap-container>#gacha-result>#result-wrapper>.gacha-result>.gacha-result-img-wrapper::before {
     content: var(--result-text, '');
     position: absolute;
-    color: chocolate;
+    color: #ff0000;
     font-size: 40px;
     left: 5px;
     top: 5px;
     font-weight: bolder;
     -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: #ffd0a7;
+    -webkit-text-stroke-color: #ffffff;
 }
 
 #overlap-container>#gacha-result>#result-wrapper>.gacha-result>.gacha-result-img-wrapper>img {
@@ -298,4 +299,12 @@ body {
     100% {
         background-position: 0% 0%;
     }
+}
+
+@font-face {
+    font-family: 'JuneGull';
+    src: url('./fonts/junegull.woff2') format('woff2'),
+        url('./fonts/junegull.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
