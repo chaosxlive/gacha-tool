@@ -13,6 +13,9 @@ async function main() {
   const eleGachaResultWrapper = document.getElementById('result-wrapper');
   const eleOptionPanel = document.getElementById('option-panel');
   const eleStockController = document.getElementById('stock-controller');
+  const eleUndoResult = document.getElementById('undo-result');
+  const eleOpLog = document.getElementById('op-log');
+  const eleRedoHistory = document.getElementById('redo-result');
   const eleMainApp = document.getElementById('main-app');
   const eleLogo = document.getElementById('logo');
   const eleGachaIdle = document.getElementById('gacha-idle');
@@ -29,6 +32,14 @@ async function main() {
 
   let activeType = 1;
 
+  const stock = {};
+  const isStockEnabled = {};
+  const stockSetter = {};
+
+  const history = [];
+  let historyIdx = -1;
+
+  initStock();
   initResultBox();
   initOptions();
 
@@ -67,14 +78,54 @@ async function main() {
 
     console.log(`Roll Gacha: ${activeType}`);
 
+    const rollResult = [];
+
     for (let i = 0; i < activeType; i++) {
-      setResultTo(i, RESULT_LIST[Math.floor(Math.random() * RESULT_LIST.length)]);
+      const availableResult = [];
+
+      for (let j = 0; j < RESULT_LIST.length; j++) {
+        if (!isStockEnabled[RESULT_LIST[j]] || stock[RESULT_LIST[j]] <= 0) {
+          continue;
+        }
+        availableResult.push(RESULT_LIST[j]);
+      }
+
+      if (availableResult.length > 0) {
+        const r = availableResult[Math.floor(Math.random() * availableResult.length)];
+        rollResult.push(r);
+        setResultTo(i, r);
+        stock[r]--;
+      } else {
+        console.log("No available result");
+        setResultTo(i, "N/A");
+      }
+      console.log("STOCK", stock);
+    }
+
+    refreshStockText();
+
+    if (rollResult.length > 0) {
+      history.length = historyIdx + 1;
+      history.push(rollResult);
+      historyIdx++;
     }
 
     function setResultTo(i, result) {
-      eleGachaResultBoxImgs[i].src = `./assets/result-${result}.jpg`;
-      eleGachaResultBoxImgWrappers[i].style.setProperty('--result-text', `"${result}"`);
+      if (result === "N/A") {
+        eleGachaResultBoxImgs[i].src = `./assets/parrot.jpg`;
+        eleGachaResultBoxImgWrappers[i].style.setProperty('--result-text', `"${result}"`);
+      } else {
+        eleGachaResultBoxImgs[i].src = `./assets/result-${result}.jpg`;
+        eleGachaResultBoxImgWrappers[i].style.setProperty('--result-text', `"${result}"`);
+      }
     }
+  }
+
+  function initStock() {
+    RESULT_LIST.forEach(r => {
+      stock[r] = 0;
+      isStockEnabled[r] = true;
+    });
   }
 
   function initResultBox() {
@@ -102,25 +153,49 @@ async function main() {
       const eleStockRow = document.createElement('div');
       eleStockRow.classList.add('stock-row');
       eleStockRows.push(eleStockRow);
+      const eleLabel = document.createElement('div');
+      eleLabel.classList.add('stock-label');
+      eleLabel.textContent = result;
+      if (isStockEnabled[result]) {
+        eleLabel.classList.add('stock-enabled');
+      } else {
+        eleLabel.classList.add('stock-disabled');
+      }
+      eleStockRow.appendChild(eleLabel);
       const eleDecreaseButton = document.createElement('div');
       eleDecreaseButton.classList.add('decrease-button');
       eleDecreaseButton.textContent = '-';
-      eleDecreaseButton.addEventListener('click', () => {
-        // TODO
-      });
       eleStockRow.appendChild(eleDecreaseButton);
       const eleAmount = document.createElement('div');
       eleAmount.classList.add('stock-amount');
-      eleAmount.textContent = '0';
+      eleAmount.textContent = String(stock[result]) || '0';
       eleStockRow.appendChild(eleAmount);
       const eleIncreaseButton = document.createElement('div');
       eleIncreaseButton.textContent = '+';
       eleIncreaseButton.classList.add('increase-button');
-      eleIncreaseButton.addEventListener('click', () => {
-        // TODO
-      });
       eleStockRow.appendChild(eleIncreaseButton);
       eleStockController.appendChild(eleStockRow);
+
+      stockSetter[result] = (v) => {
+        eleAmount.textContent = String(v);
+      };
+
+      eleLabel.addEventListener('click', () => {
+        isStockEnabled[result] = !isStockEnabled[result];
+        eleLabel.classList.toggle('stock-enabled', isStockEnabled[result]);
+        eleLabel.classList.toggle('stock-disabled', !isStockEnabled[result]);
+      });
+      eleDecreaseButton.addEventListener('click', () => {
+        if (stock[result] <= 0) {
+          return;
+        }
+        stock[result]--;
+        eleAmount.textContent = String(stock[result]);
+      });
+      eleIncreaseButton.addEventListener('click', () => {
+        stock[result]++;
+        eleAmount.textContent = String(stock[result]);
+      });
     }
   }
 
@@ -199,6 +274,14 @@ async function main() {
     eleOptionPanel.querySelector('.close').addEventListener('click', () => {
       closeOptionPanel();
     });
+
+    eleUndoResult.addEventListener('click', () => {
+      undoHistory();
+    });
+
+    eleRedoHistory.addEventListener('click', () => {
+      redoHistory();
+    });
   }
 
   function showOptionPanel() {
@@ -272,6 +355,40 @@ async function main() {
       imgBackground: background,
       resultImages: results,
     };
+  }
+
+  function refreshStockText() {
+    for (const r of RESULT_LIST) {
+      stockSetter[r](stock[r]);
+    }
+  }
+
+  function undoHistory() {
+    if (historyIdx >= 0) {
+      for (const r of history[historyIdx]) {
+        stock[r]++;
+      }
+      eleOpLog.textContent = `取消抽取: ${history[historyIdx].join(', ')}`;
+      historyIdx--;
+    } else {
+      eleOpLog.textContent = '沒有更多抽取紀錄了';
+    }
+
+    refreshStockText();
+  }
+
+  function redoHistory() {
+    if (historyIdx + 1 < history.length) {
+      historyIdx++;
+      for (const r of history[historyIdx]) {
+        stock[r]--;
+      }
+      eleOpLog.textContent = `重做抽取: ${history[historyIdx].join(', ')}`;
+    } else {
+      eleOpLog.textContent = '沒有更多抽取紀錄了';
+    }
+
+    refreshStockText();
   }
 
 }

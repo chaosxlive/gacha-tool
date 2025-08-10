@@ -235,6 +235,25 @@ body {
     column-gap: 10px;
 }
 
+#overlap-container>#option-panel>#stock-controller>.stock-row>.stock-label {
+    width: 34%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 60px;
+    user-select: none;
+    cursor: pointer;
+}
+
+#overlap-container>#option-panel>#stock-controller>.stock-row>.stock-label.stock-enabled {
+    color: #009c2f;
+}
+
+#overlap-container>#option-panel>#stock-controller>.stock-row>.stock-label.stock-disabled {
+    color: #b32a00;
+}
+
 #overlap-container>#option-panel>#stock-controller>.stock-row>.decrease-button {
     width: 33%;
     height: 100%;
@@ -265,6 +284,48 @@ body {
     font-size: 60px;
     user-select: none;
     cursor: pointer;
+}
+
+#overlap-container>#option-panel>#undo-result {
+    position: absolute;
+    left: 1rem;
+    bottom: 1rem;
+}
+
+#overlap-container>#option-panel>#undo-result::before {
+    display: ruby-text;
+    content: "\276E";
+    font-size: 70px;
+    line-height: 70px;
+    font-weight: bold;
+    -webkit-text-stroke: 2px #cb9f62;
+}
+
+#overlap-container>#option-panel>#op-log {
+    position: absolute;
+    left: 50%;
+    bottom: 0.25rem;
+    transform: translateX(-50%);
+    display: ruby-text;
+    content: "";
+    font-size: 20px;
+    line-height: 20px;
+    -webkit-text-stroke: 2px #cb9f62;
+}
+
+#overlap-container>#option-panel>#redo-result {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+}
+
+#overlap-container>#option-panel>#redo-result::before {
+    display: ruby-text;
+    content: "\276F";
+    font-size: 70px;
+    line-height: 70px;
+    font-weight: bold;
+    -webkit-text-stroke: 2px #cb9f62;
 }
 
 #logo-row {
