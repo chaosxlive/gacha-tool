@@ -194,6 +194,79 @@ body {
     border-radius: 15%;
 }
 
+#overlap-container>#option-panel {
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    position: relative;
+}
+
+#overlap-container>#option-panel>.close {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+}
+
+#overlap-container>#option-panel>.close::before {
+    display: ruby-text;
+    content: "\00d7";
+    font-size: 70px;
+    line-height: 70px;
+    font-weight: bold;
+    -webkit-text-stroke: 2px #cb9f62;
+}
+
+#overlap-container>#option-panel>#stock-controller {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 2%;
+}
+
+#overlap-container>#option-panel>#stock-controller>.stock-row {
+    width: 60%;
+    height: 12%;
+    background-color: #008ab4;
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
+}
+
+#overlap-container>#option-panel>#stock-controller>.stock-row>.decrease-button {
+    width: 33%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 60px;
+    user-select: none;
+    cursor: pointer;
+}
+
+#overlap-container>#option-panel>#stock-controller>.stock-row>.stock-amount {
+    width: 34%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 60px;
+    user-select: none;
+}
+
+#overlap-container>#option-panel>#stock-controller>.stock-row>.increase-button {
+    width: 33%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 60px;
+    user-select: none;
+    cursor: pointer;
+}
+
 #logo-row {
     width: 100%;
     height: 5%;

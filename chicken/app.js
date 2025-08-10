@@ -1,7 +1,7 @@
 async function main() {
 
   const RESULT_LIST = Array.from('ABCDEF');
-  const APP_PREFIX = 'SAMPLE';
+  const APP_PREFIX = 'CHICKEN';
   const MAX_RESULT_COUNT = 10;
 
   const { imgBackground } = await loadAllRequiredImages();
@@ -11,6 +11,8 @@ async function main() {
   const eleGachaFlash = document.getElementById('gacha-flash');
   const eleGachaResult = document.getElementById('gacha-result');
   const eleGachaResultWrapper = document.getElementById('result-wrapper');
+  const eleOptionPanel = document.getElementById('option-panel');
+  const eleStockController = document.getElementById('stock-controller');
   const eleMainApp = document.getElementById('main-app');
   const eleLogo = document.getElementById('logo');
   const eleGachaIdle = document.getElementById('gacha-idle');
@@ -22,10 +24,13 @@ async function main() {
   const eleGachaResultBoxImgWrappers = [];
   /** @type {Array<HTMLImageElement>} */
   const eleGachaResultBoxImgs = [];
+  /** @type {Array<HTMLElement>} */
+  const eleStockRows = [];
 
   let activeType = 1;
 
   initResultBox();
+  initOptions();
 
   registerListeners();
   adjustScreenSize();
@@ -88,6 +93,34 @@ async function main() {
       eleGachaResultBoxImgWrapper.appendChild(eleGachaResultBoxImg);
       eleGachaResultBox.appendChild(eleGachaResultBoxImgWrapper);
       eleGachaResultWrapper.appendChild(eleGachaResultBox);
+    }
+  }
+
+  function initOptions() {
+    for (let i = 0; i < RESULT_LIST.length; i++) {
+      const result = RESULT_LIST[i];
+      const eleStockRow = document.createElement('div');
+      eleStockRow.classList.add('stock-row');
+      eleStockRows.push(eleStockRow);
+      const eleDecreaseButton = document.createElement('div');
+      eleDecreaseButton.classList.add('decrease-button');
+      eleDecreaseButton.textContent = '-';
+      eleDecreaseButton.addEventListener('click', () => {
+        // TODO
+      });
+      eleStockRow.appendChild(eleDecreaseButton);
+      const eleAmount = document.createElement('div');
+      eleAmount.classList.add('stock-amount');
+      eleAmount.textContent = '0';
+      eleStockRow.appendChild(eleAmount);
+      const eleIncreaseButton = document.createElement('div');
+      eleIncreaseButton.textContent = '+';
+      eleIncreaseButton.classList.add('increase-button');
+      eleIncreaseButton.addEventListener('click', () => {
+        // TODO
+      });
+      eleStockRow.appendChild(eleIncreaseButton);
+      eleStockController.appendChild(eleStockRow);
     }
   }
 
@@ -158,6 +191,24 @@ async function main() {
     eleGachaResult.querySelector('.close').addEventListener('click', () => {
       closeResult();
     });
+
+    eleLogo.addEventListener('click', () => {
+      showOptionPanel();
+    });
+
+    eleOptionPanel.querySelector('.close').addEventListener('click', () => {
+      closeOptionPanel();
+    });
+  }
+
+  function showOptionPanel() {
+    eleOverlapContainer.hidden = false;
+    eleOptionPanel.hidden = false;
+  }
+
+  function closeOptionPanel() {
+    eleOptionPanel.hidden = true;
+    eleOverlapContainer.hidden = true;
   }
 
   function toggleAppLoading() {
