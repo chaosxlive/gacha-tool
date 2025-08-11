@@ -355,7 +355,11 @@ async function main() {
         const img = await loadImage(`./assets/result-${r}.jpg`);
         results.push(img);
         resolve(img);
-      }))
+      })),
+      new Promise(async resolve => {
+        parrot = await loadImage('./assets/parrot.jpg');
+        resolve(parrot);
+      }),
     ]);
     return {
       imgBackground: background,
