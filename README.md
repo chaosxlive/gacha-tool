@@ -1,30 +1,28 @@
-# 🛡️ 版權聲明（Copyright Notice）
+# 🛡️ 授權聲明（License Notice）
 
-本專案（Repository）中包含的所有內容，包括但不限於：
+本專案分為兩類授權內容：
 
-- 原始程式碼（Source Code）
-- 圖片、影片、音訊等媒體檔案（Media Files）
-- 字型、設計資產、配置檔案等其他資料（Fonts, Assets, Configs）
+## 1️⃣ 程式碼授權（Source Code License）
+- 本專案中所有 **原始程式碼** 依照 [MIT License](./LICENSE) 授權。
+- 你可以自由使用、修改、散佈、商業化，但必須保留原本的版權與授權聲明。
 
-均由 **Z.B. Weng** 創作並保留所有權利（All rights reserved），除非另有特別聲明。
-
-未經本人書面授權，禁止以任何形式進行下列行為：
-- 轉載、複製、修改、重製
-- 用於商業用途或再發佈
-- 以原始或修改形式散布於他處
+## 2️⃣ 非程式碼素材（Non-Code Assets）
+除特別聲明外，所有非程式碼素材（包括但不限於圖片、影片、音訊、字型、設計資產、配置檔案）**不授權**於 MIT。
+- 這些素材仍由 **Z.B. Weng** 或原作者保留所有權利。
+- 未經書面授權，禁止複製、修改、再發佈或用於商業用途。
 
 ---
 
-## 📁 特別註記
+## 📁 特別註記（Special Notices）
 
 - `chicken/` 資料夾中的素材來源已獲得 **天風** 的授權使用，僅限於本專案範圍內使用，未經授權不得另行使用或轉載。
-- 本專案中所使用之字型 **JuneGull** 來自 [Larabie Fonts](https://www.larabiefonts.com/)，依其官方之免費授權條款（Freeware EULA）使用。該字型允許免費用於個人與商業用途，詳見 [Larabie Fonts EULA](https://www.larabiefonts.com)。
+- 本專案中所使用之字型 **JuneGull** 來自 [Larabie Fonts](https://www.larabiefonts.com/)，依其官方免費授權條款（Freeware EULA）使用。
   - Font name: `JuneGull`
   - Author: Ray Larabie
-  - License: Freeware (personal and commercial use permitted)
-- 圖檔 `ivan-tang-PrHGn1ECJqE-unsplash.jpg`, 由 <a href="https://unsplash.com/@ivanavai?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Ivan Tang</a> 分享於 <a href="https://unsplash.com/photos/a-close-up-of-a-parrot-with-a-blurry-background-PrHGn1ECJqE?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
-      
+  - License: Freeware（允許個人與商業用途）
+  - 詳見 [Larabie Fonts EULA](https://www.larabiefonts.com)
+- 圖檔 `ivan-tang-PrHGn1ECJqE-unsplash.jpg` 由 [Ivan Tang](https://unsplash.com/@ivanavai) 分享於 [Unsplash](https://unsplash.com/photos/a-close-up-of-a-parrot-with-a-blurry-background-PrHGn1ECJqE)，依 Unsplash 授權條款使用。
 
 ---
 
-© 2025 Z.B. Weng. All rights reserved.
+© 2025 Z.B. Weng.
