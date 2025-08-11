@@ -123,8 +123,8 @@ async function main() {
 
   function initStock() {
     RESULT_LIST.forEach(r => {
-      stock[r] = 0;
-      isStockEnabled[r] = true;
+      stock[r] = Number(localStorage.getItem(`${APP_PREFIX}_stock_${r}`) ?? 0);
+      isStockEnabled[r] = (localStorage.getItem(`${APP_PREFIX}_isStockEnabled_${r}`) ?? 'true') === 'true';
     });
   }
 
@@ -184,6 +184,8 @@ async function main() {
         isStockEnabled[result] = !isStockEnabled[result];
         eleLabel.classList.toggle('stock-enabled', isStockEnabled[result]);
         eleLabel.classList.toggle('stock-disabled', !isStockEnabled[result]);
+
+        localStorage.setItem(`${APP_PREFIX}_isStockEnabled_${result}`, isStockEnabled[result]);
       });
       eleDecreaseButton.addEventListener('click', () => {
         if (stock[result] <= 0) {
@@ -191,10 +193,14 @@ async function main() {
         }
         stock[result]--;
         eleAmount.textContent = String(stock[result]);
+
+        localStorage.setItem(`${APP_PREFIX}_stock_${result}`, stock[result]);
       });
       eleIncreaseButton.addEventListener('click', () => {
         stock[result]++;
         eleAmount.textContent = String(stock[result]);
+
+        localStorage.setItem(`${APP_PREFIX}_stock_${result}`, stock[result]);
       });
     }
   }
@@ -360,6 +366,7 @@ async function main() {
   function refreshStockText() {
     for (const r of RESULT_LIST) {
       stockSetter[r](stock[r]);
+      localStorage.setItem(`${APP_PREFIX}_stock_${r}`, stock[r]);
     }
   }
 
